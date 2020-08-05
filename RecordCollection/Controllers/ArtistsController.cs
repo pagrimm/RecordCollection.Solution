@@ -31,8 +31,8 @@ namespace RecordCollection.Controllers
 
     public ActionResult Create()
     {
-      ViewBag.AlbumId = new SelectList(_db.Albums; "AlbumId", "Name");
-      ViewBag.GenreId = new SelectList(_db.Genres; "GenreId", "Name");
+      ViewBag.AlbumId = new SelectList(_db.Albums, "AlbumId", "Name");
+      ViewBag.GenreId = new SelectList(_db.Genres, "GenreId", "Name");
       return View();
     }
 
@@ -69,6 +69,7 @@ namespace RecordCollection.Controllers
       return view(artist);
     }
 
+    [HttpPost]
     public ActionResult Edit(Artist artist)
     {
       _db.Entry(artist).State = EntityState.Modified;
