@@ -1,0 +1,45 @@
+@{
+  Layout = "_Layout";
+}
+
+@model RecordCollection.Models.Album;
+
+<h2>Album Details</h2>
+<hr />
+<h3>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</h3>
+
+@if(ViewBag.ArtistCount == 0)
+{
+  <p>There are no artists associated with this album.</p>
+}
+else
+{
+  <h4>Artists:</h4>
+  <ul>
+  @foreach(var join in Model.ArtistsGenres)
+  {
+    <li>@Html.ActionLink($"{join.Artist.Name}", "Details", "Artists", new { id = @join.Artist.ArtistId})</li>
+  }
+  </ul>
+}
+
+@if(ViewBag.GenreCount == 0)
+{
+  <p>There are no genres associated with this album.</p>
+}
+else
+{
+  <h4>Genres:</h4>
+  <ul>
+  @foreach(var join in Model.ArtistsGenres)
+  {
+    <li>@Html.ActionLink($"{join.Genre.Name}", "Details", "Genres", new { id = @join.Genre.GenreId})</li>
+  }
+  </ul>
+}
+
+<p>@Html.ActionLink("Back to albums", "Index")</p>
+<p>@Html.ActionLink("Edit Album", "Edit", new { id = Model.AlbumId })</p>
+<p>@Html.ActionLink("Delete Album", "Delete", new { id = Model.AlbumId })</p>
+<p>@Html.ActionLink("Add Artist", "AddArtist", new { id = Model.AlbumId })</p>
+<p>@Html.ActionLink("Add Genre", "AddGenre", new { id = Model.AlbumId })</p>

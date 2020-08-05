@@ -61,6 +61,8 @@ namespace RecordCollection.Controllers
         .Include(albums => albums.ArtistsGenres)
         .ThenInclude(join => join.Genre)
         .First(albums => albums.AlbumId == id);
+      ViewBag.ArtistCount = _db.AlbumArtistGenre.Where(join => join.AlbumId == id).Where(join => join.ArtistId != null).Count();
+      ViewBag.GenreCount = _db.AlbumArtistGenre.Where(join => join.AlbumId == id).Where(join => join.GenreId != null).Count();
       return View(album);  
     }
 
