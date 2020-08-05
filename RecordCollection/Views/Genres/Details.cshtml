@@ -31,7 +31,7 @@ else
 {
   <h4>Genres:</h4>
   <ul>
-  @foreach(var join in Model.AlbumsGenres)
+  @foreach(var join in Model.AlbumsArtists)
   {
     <li>@Html.ActionLink($"{join.Artist.Name}", "Details", "Genres", new { id = @join.Artist.ArtistId})</li>
   }
