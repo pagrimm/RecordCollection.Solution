@@ -4,3 +4,21 @@
 
 @model RecordCollection.Models.Album
 
+<h2>Add Album</h2>
+
+@using (Html.BeginForm())
+{
+  @Html.LabelFor(model => model.Name)
+  @Html.TextBoxFor(model => model.Name)
+
+  @Html.Label("Add an Artist To This Album: ")
+  @Html.DropDownList("ArtistId")
+
+  @Html.Label("Add a Genre To This Album: ")
+  @Html.DropDownList("GenreId")
+
+  <input type="submit" value="Add Album" />
+}
+
+<p>@Html.ActionLink("Album List", "Index")</p>
+<p>@Html.ActionLink("Home", "Index", "Home")</p>

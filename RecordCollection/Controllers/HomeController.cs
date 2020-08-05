@@ -13,11 +13,11 @@ namespace RecordCollection.Controllers
     [HttpPost]
     public ActionResult Index(string searchOption, string searchString)
     {
-      if (searchOption = "albums")
+      if (searchOption == "albums")
       {
         return RedirectToAction("Index", "Albums", new {name = searchString});
       }
-      else if (searchOption = "artists")
+      else if (searchOption == "artists")
       {
         return RedirectToAction("Index", "Artists", new {name = searchString});
       }

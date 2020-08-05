@@ -33,7 +33,7 @@ namespace RecordCollection.Controllers
     public ActionResult Create()
     {
       ViewBag.ArtistId = new SelectList(_db.Artists, "ArtistId", "Name");
-      ViewBag.GenereId = new SelectList(_db.Genres, "GenreId", "Name");
+      ViewBag.GenreId = new SelectList(_db.Genres, "GenreId", "Name");
       return View();
     }
 
@@ -97,7 +97,7 @@ namespace RecordCollection.Controllers
     public ActionResult AddArtist(int id)
     {
       Album model = _db.Albums.FirstOrDefault(album => album.AlbumId == id);
-      ViewBag.SelectList(_db.Artists, "ArtistId", "Name");
+      ViewBag.ArtistId = new SelectList(_db.Artists, "ArtistId", "Name");
       return View(model);
     }
     
