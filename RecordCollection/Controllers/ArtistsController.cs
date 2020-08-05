@@ -55,18 +55,18 @@ namespace RecordCollection.Controllers
     public ActionResult Details(int id)
     {
       Artist artist = _db.Artists
-        .Include(artists => artists.AlbumArtistGenre)
+        .Include(artists => artists.AlbumsGenres)
         .ThenInclude(join => join.Album)
-        .Include(artists => artists.AlbumArtistGenre)
+        .Include(artists => artists.AlbumsGenres)
         .ThenInclude(join => join.Genre)
-        .FirstOrDefault(artists => artists.ArtistId = id);
+        .FirstOrDefault(artists => artists.ArtistId == id);
       return View(artist);
     }
 
     public ActionResult Edit(int id)
     {
       Artist artist = _db.Artists.FirstOrDefault(artists => artists.ArtistId == id);
-      return view(artist);
+      return View(artist);
     }
 
     [HttpPost]
@@ -74,19 +74,19 @@ namespace RecordCollection.Controllers
     {
       _db.Entry(artist).State = EntityState.Modified;
       _db.SaveChanges();
-      return RedirectToAction("Details", new { id == artist.ArtistId });
+      return RedirectToAction("Details", new { id = artist.ArtistId });
     }
 
     public ActionResult Delete(int id)
     {
-      Artist artist = _db.Artists.FirstOrDefault(artists => artist.ArtistId == id);
+      Artist artist = _db.Artists.FirstOrDefault(artists => artists.ArtistId == id);
       return View(artist);
     }
 
     [HttpPost, ActionName("Delete")]
     public ActionResult DeleteConfirmed(int id)
     {
-      Artist artist = _db.Artist.FirstOrDefault(artists => artist.ArtistId == id);
+      Artist artist = _db.Artists.FirstOrDefault(artists => artists.ArtistId == id);
       _db.Artists.Remove(artist);
       _db.SaveChanges();
       return RedirectToAction("Index");
@@ -94,7 +94,7 @@ namespace RecordCollection.Controllers
 
     public ActionResult AddAlbum(int id)
     {
-      Artist artist = _db.Artist.FirstOrDefault(artists => artist.ArtistId == id);
+      Artist artist = _db.Artists.FirstOrDefault(artists => artists.ArtistId == id);
       ViewBag.AlbumId = new SelectList(_db.Albums, "AlbumId", "Name");
       return View(artist);
     }
@@ -108,7 +108,7 @@ namespace RecordCollection.Controllers
 
     public ActionResult AddGenre(int id)
     {
-      Artist artist = _db.Artist.FirstOrDefault(artists => artist.ArtistId == id);
+      Artist artist = _db.Artists.FirstOrDefault(artists => artists.ArtistId == id);
       ViewBag.GenreId = new SelectList(_db.Genres, "GenreId", "Name");
       return View(artist);
     }

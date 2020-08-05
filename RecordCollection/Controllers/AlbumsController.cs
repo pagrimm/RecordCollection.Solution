@@ -8,7 +8,7 @@ using RecordCollection.Models;
 
 namespace RecordCollection.Controllers
 {
-  public class AlbumsController : Controllers
+  public class AlbumsController : Controller
   {
   
     private readonly RecordCollectionContext _db;
@@ -38,7 +38,7 @@ namespace RecordCollection.Controllers
     }
 
     [HttpPost]
-    public ActionResutl Create(Album albums, int ArtistId, int GenreId)
+    public ActionResult Create(Album albums, int ArtistId, int GenreId)
     {
       _db.Albums.Add(albums);
       if (ArtistId != 0)
@@ -56,11 +56,11 @@ namespace RecordCollection.Controllers
     public ActionResult Details(int id)
     {
       Album album = _db.Albums
-        .Include(albums => albums.AlbumArtistGenre)
+        .Include(albums => albums.ArtistsGenres)
         .ThenInclude(join => join.Artist)
-        .Include(albums => albums.AlbumArtistGenre)
+        .Include(albums => albums.ArtistsGenres)
         .ThenInclude(join => join.Genre)
-        .First(albums => albums.AlbumId = id);
+        .First(albums => albums.AlbumId == id);
       return View(album);  
     }
 
@@ -75,6 +75,7 @@ namespace RecordCollection.Controllers
     {
       _db.Entry(album).State = EntityState.Modified;
       _db.SaveChanges();
+      return RedirectToAction("Details", new { id = album.AlbumId });
     }
 
     public ActionResult Delete(int id)
@@ -101,7 +102,7 @@ namespace RecordCollection.Controllers
     [HttpPost]
     public ActionResult AddArtist(Album album, int artistId)
     {
-      _db.AlbumArtistGenre.Add(new AlbumArtistGenre(){AlbumId = album.AlbumId, ArtistId = artistId})
+      _db.AlbumArtistGenre.Add(new AlbumArtistGenre(){AlbumId = album.AlbumId, ArtistId = artistId});
       return RedirectToAction("Details", new {id = album.AlbumId});
     }
     
