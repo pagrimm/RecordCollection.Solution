@@ -111,7 +111,7 @@ namespace RecordCollection.Controllers
     public ActionResult AddGenre(int id)
     {
       Album model = _db.Albums.FirstOrDefault(album => album.AlbumId == id);
-      ViewBag.SelectList(_db.Genres, "GenreId", "Name");
+      ViewBag.GenreId = new SelectList(_db.Genres, "GenreId", "Name");
       return View(model);
     }
     
