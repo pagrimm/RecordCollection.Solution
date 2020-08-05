@@ -1,0 +1,22 @@
+@{
+  Layout = "_Layout";
+}
+
+@model RecordCollection.Models.Genre
+
+<h2>Add Artist to @Html.DisplayFor(model => model.Name)</h2>
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.GenreId)
+
+  @Html.Label("Select Artist:")
+  @Html.DropDownList("ArtistId")
+
+  <input type="submit" value="Add Artist" />
+}
+
+<p>@Html.ActionLink("Back Without Saving", "Details", new { id = Model.GenreId })</p>
+<p>@Html.ActionLink("Add Album", "AddAlbum", new { id = Model.GenreId })</p>
+<p>@Html.ActionLink("Genre List", "Index")</p>
+<p>@Html.ActionLink("Home", "Index", "Home")</p>

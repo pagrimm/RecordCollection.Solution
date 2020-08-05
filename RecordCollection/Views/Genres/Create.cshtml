@@ -1,0 +1,24 @@
+@{
+  Layout = "_Layout";
+}
+
+@model RecordCollection.Models.Genre
+
+<h2>Add Genre</h2>
+
+@using (Html.BeginForm())
+{
+  @Html.LabelFor(model => model.Name)
+  @Html.TextBoxFor(model => model.Name)
+
+  @Html.Label("Add an Album To This Genre: ")
+  @Html.DropDownList("AlbumId")
+
+  @Html.Label("Add an Artist To This Genre: ")
+  @Html.DropDownList("ArtistId")
+
+  <input type="submit" value="Add Genre" />
+}
+
+<p>@Html.ActionLink("Genre List", "Index")</p>
+<p>@Html.ActionLink("Home", "Index", "Home")</p>
