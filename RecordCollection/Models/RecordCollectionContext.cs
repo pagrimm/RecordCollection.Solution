@@ -10,5 +10,22 @@ namespace RecordCollection.Models
     public DbSet<AlbumArtistGenre> AlbumArtistGenre { get; set; }
 
     public RecordCollectionContext(DbContextOptions options) : base(options) { }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+      modelBuilder.Entity<Genre>().HasData(
+        new Genre
+        {
+          GenreId = 1,
+          Name = "Rock"
+        },
+
+        new Genre
+        {
+          GenreId = 2,
+          Name = "Country"
+        }
+      );
+    }
   }
 }
