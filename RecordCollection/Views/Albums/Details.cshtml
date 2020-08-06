@@ -10,7 +10,7 @@
 <h3>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</h3>
 @if(Model.ImageUrl != null)
 {
-  <img src=$"{Model.ImageUrl}" />
+  <img src="@Model.ImageUrl" />
 }
 
 @if(ViewBag.ArtistCount == 0)
