@@ -12,10 +12,10 @@
   @Html.TextBoxFor(model => model.Name)
 
   @Html.Label("Add an Album To This Artist: ")
-  @Html.DropDownList("AlbumId")
+  @Html.DropDownList("AlbumId", (SelectList)ViewBag.AlbumId, " ")
 
   @Html.Label("Add a Genre To This Artist: ")
-  @Html.DropDownList("GenreId")
+  @Html.DropDownList("GenreId", (SelectList)ViewBag.GenreId, " ")
 
   <input type="submit" value="Add Artist" />
 }

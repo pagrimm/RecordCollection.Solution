@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RecordCollection.Models;
 
 namespace RecordCollection.Migrations
 {
     [DbContext(typeof(RecordCollectionContext))]
-    partial class RecordCollectionContextModelSnapshot : ModelSnapshot
+    [Migration("20200806174624_SongModel")]
+    partial class SongModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -95,8 +97,6 @@ namespace RecordCollection.Migrations
                     b.Property<int>("AlbumId");
 
                     b.Property<string>("Name");
-
-                    b.Property<int>("TrackNumber");
 
                     b.HasKey("SongId");
 

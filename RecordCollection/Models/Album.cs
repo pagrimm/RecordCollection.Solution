@@ -7,10 +7,12 @@ namespace RecordCollection.Models
     public Album()
     {
       this.ArtistsGenres = new HashSet<AlbumArtistGenre>();
+      this.Songs = new HashSet<Song>();
     }
     
     public int AlbumId { get; set; }
     public string Name { get; set; }
     public virtual ICollection<AlbumArtistGenre> ArtistsGenres { get; set; }
+    public virtual ICollection<Song> Songs { get; set; }
   }
 }

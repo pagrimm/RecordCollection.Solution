@@ -105,6 +105,7 @@ namespace RecordCollection.Controllers
     public ActionResult AddAlbum(Artist artist, int AlbumId)
     {
       _db.AlbumArtistGenre.Add(new AlbumArtistGenre(){ AlbumId = AlbumId, ArtistId = artist.ArtistId });
+      _db.SaveChanges();
       return RedirectToAction("Details", new { id = artist.ArtistId });
     }
 
@@ -119,6 +120,7 @@ namespace RecordCollection.Controllers
     public ActionResult AddGenre(Artist artist, int GenreId)
     {
       _db.AlbumArtistGenre.Add(new AlbumArtistGenre(){ GenreId = GenreId, ArtistId = artist.ArtistId });
+      _db.SaveChanges();
       return RedirectToAction("Details", new { id = artist.ArtistId });
     }
   }
