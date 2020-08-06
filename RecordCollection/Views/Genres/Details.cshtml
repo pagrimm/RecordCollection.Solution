@@ -2,6 +2,7 @@
   Layout = "_Layout";
 }
 
+@using RecordCollection.Models;
 @model RecordCollection.Models.Genre;
 
 <h2>Genre Details</h2>
@@ -16,9 +17,12 @@ else
 {
   <h4>Albums:</h4>
   <ul>
-  @foreach(var join in Model.AlbumsArtists)
+  @foreach(AlbumArtistGenre join in Model.AlbumsArtists)
   {
-    <li>@Html.ActionLink($"{join.Album.Name}", "Details", "Artists", new { id = @join.Album.AlbumId})</li>
+    @if(join.AlbumId != null)
+    {
+    <li>@Html.ActionLink($"{join.Album.Name}", "Details", "Albums", new { id = @join.Album.AlbumId})</li>
+    }
   }
   </ul>
 }
@@ -29,11 +33,14 @@ else
 }
 else
 {
-  <h4>Genres:</h4>
+  <h4>Artists:</h4>
   <ul>
-  @foreach(var join in Model.AlbumsArtists)
+  @foreach(AlbumArtistGenre join in Model.AlbumsArtists)
   {
-    <li>@Html.ActionLink($"{join.Artist.Name}", "Details", "Genres", new { id = @join.Artist.ArtistId})</li>
+    @if (join.ArtistId != null)
+    {
+    <li>@Html.ActionLink($"{join.Artist.Name}", "Details", "Artists", new { id = @join.Artist.ArtistId})</li>
+    }
   }
   </ul>
 }
