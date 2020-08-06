@@ -2,11 +2,16 @@
   Layout = "_Layout";
 }
 
+@using RecordCollection.Models;
 @model RecordCollection.Models.Album;
 
 <h2>Album Details</h2>
 <hr />
 <h3>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</h3>
+@if(Model.ImageUrl != null)
+{
+  <img src="@Model.ImageUrl" />
+}
 
 @if(ViewBag.ArtistCount == 0)
 {
@@ -16,9 +21,12 @@ else
 {
   <h4>Artists:</h4>
   <ul>
-  @foreach(var join in Model.ArtistsGenres)
+  @foreach(AlbumArtistGenre join in Model.ArtistsGenres)
   {
-    <li>@Html.ActionLink($"{join.Artist.Name}", "Details", "Artists", new { id = @join.Artist.ArtistId})</li>
+    if (join.ArtistId != null)
+    {
+      <li>@Html.ActionLink($"{join.Artist.Name}", "Details", "Artists", new { id = @join.Artist.ArtistId})</li>
+    }
   }
   </ul>
 }
@@ -31,9 +39,12 @@ else
 {
   <h4>Genres:</h4>
   <ul>
-  @foreach(var join in Model.ArtistsGenres)
+  @foreach(AlbumArtistGenre join in Model.ArtistsGenres)
   {
-    <li>@Html.ActionLink($"{join.Genre.Name}", "Details", "Genres", new { id = @join.Genre.GenreId})</li>
+    if (join.GenreId != null)
+    {
+      <li>@Html.ActionLink($"{join.Genre.Name}", "Details", "Genres", new { id = @join.Genre.GenreId})</li>
+    }
   }
   </ul>
 }

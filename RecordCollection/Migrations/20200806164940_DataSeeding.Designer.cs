@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RecordCollection.Models;
 
 namespace RecordCollection.Migrations
 {
     [DbContext(typeof(RecordCollectionContext))]
-    partial class RecordCollectionContextModelSnapshot : ModelSnapshot
+    [Migration("20200806164940_DataSeeding")]
+    partial class DataSeeding
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,8 +23,6 @@ namespace RecordCollection.Migrations
                 {
                     b.Property<int>("AlbumId")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<string>("ImageUrl");
 
                     b.Property<string>("Name");
 
@@ -58,8 +58,6 @@ namespace RecordCollection.Migrations
                     b.Property<int>("ArtistId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("ImageUrl");
-
                     b.Property<string>("Name");
 
                     b.HasKey("ArtistId");
@@ -91,24 +89,6 @@ namespace RecordCollection.Migrations
                         });
                 });
 
-            modelBuilder.Entity("RecordCollection.Models.Song", b =>
-                {
-                    b.Property<int>("SongId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("AlbumId");
-
-                    b.Property<string>("Name");
-
-                    b.Property<int>("TrackNumber");
-
-                    b.HasKey("SongId");
-
-                    b.HasIndex("AlbumId");
-
-                    b.ToTable("Songs");
-                });
-
             modelBuilder.Entity("RecordCollection.Models.AlbumArtistGenre", b =>
                 {
                     b.HasOne("RecordCollection.Models.Album", "Album")
@@ -122,14 +102,6 @@ namespace RecordCollection.Migrations
                     b.HasOne("RecordCollection.Models.Genre", "Genre")
                         .WithMany("AlbumsArtists")
                         .HasForeignKey("GenreId");
-                });
-
-            modelBuilder.Entity("RecordCollection.Models.Song", b =>
-                {
-                    b.HasOne("RecordCollection.Models.Album", "Album")
-                        .WithMany("Songs")
-                        .HasForeignKey("AlbumId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

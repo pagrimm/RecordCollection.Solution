@@ -1,0 +1,25 @@
+@{
+  Layout = "_Layout";
+}
+
+@model RecordCollection.Models.Song
+
+<h2>Edit @Html.DisplayFor(model => model.Name)</h2>
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.SongId)
+
+  @Html.LabelFor(model => model.Name)
+  @Html.TextBoxFor(model => model.Name)
+
+  @Html.LabelFor(model => model.TrackNumber)
+  @Html.TextBoxFor(model => model.TrackNumber, new { @type="number"})
+
+  @Html.Label("Album")
+  @Html.DropDownListFor(model => model.AlbumId, (SelectList)ViewBag.AlbumId)
+
+  <input type="submit" value="Save" />
+}
+
+<p>@Html.ActionLink("Back Without Editting", "Details", new { id = Model.SongId })</p>

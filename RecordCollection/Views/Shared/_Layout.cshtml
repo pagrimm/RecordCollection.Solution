@@ -27,7 +27,10 @@
         <div class="col-md-1">
           @Html.ActionLink("Genres", "Index", "Genres")
         </div>
-        <div class="col-md-2">
+        <div class="col-md-1">
+          @Html.ActionLink("Songs", "Index", "Songs")
+        </div>
+        <div class="col-md-1">
         </div>
         <div class="col-md-6">
           <form action="/" method="post">
@@ -35,6 +38,7 @@
               <option value="albums">Search Albums</option>
               <option value="artists">Search Artists</option>
               <option value="genres">Search Genres</option>
+              <option value="songs">Search Songs</option>
             </select>
             <input name="searchString" id="searchString" type="search" placeholder="Search">
             <button type="submit">Search</button>

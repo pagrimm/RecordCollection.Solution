@@ -60,6 +60,8 @@ namespace RecordCollection.Controllers
         .Include(genres => genres.AlbumsArtists)
         .ThenInclude(join => join.Artist)
         .FirstOrDefault(genres => genres.GenreId == id);
+      ViewBag.AlbumCount = _db.AlbumArtistGenre.Where(join => join.GenreId == id).Where(join => join.AlbumId != null).Count();
+      ViewBag.ArtistCount = _db.AlbumArtistGenre.Where(join => join.GenreId == id).Where(join => join.ArtistId != null).Count();
       return View(genre);
     }
 
@@ -103,6 +105,7 @@ namespace RecordCollection.Controllers
     public ActionResult AddAlbum(Genre genre, int AlbumId)
     {
       _db.AlbumArtistGenre.Add(new AlbumArtistGenre(){ AlbumId = AlbumId, GenreId = genre.GenreId });
+      _db.SaveChanges();
       return RedirectToAction("Details", new { id = genre.GenreId });
     }
 
@@ -117,6 +120,7 @@ namespace RecordCollection.Controllers
     public ActionResult AddArtist(Genre genre, int ArtistId)
     {
       _db.AlbumArtistGenre.Add(new AlbumArtistGenre(){ ArtistId = ArtistId, GenreId = genre.GenreId });
+      _db.SaveChanges();
       return RedirectToAction("Details", new { id = genre.GenreId });
     }
   }

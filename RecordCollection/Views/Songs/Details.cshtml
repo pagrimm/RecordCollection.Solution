@@ -1,0 +1,22 @@
+@{
+  Layout = "_layout";
+}
+
+@using RecordCollection.Models;
+@model RecordCollection.Models.Song;
+
+<h2>Song Details</h2>
+<hr />
+<h3>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</h3>
+<h3>Track: @Html.DisplayFor(model => model.TrackNumber)</h3>
+<h3>Album: @Html.DisplayFor(model => model.Album.Name)</h3>
+<h3>Artists:</h3>
+<ul>
+  @foreach(AlbumArtistGenre join in Model.Album.ArtistsGenres)
+  {
+    @if (join.ArtistId != null)
+    {
+      <li>@Html.ActionLink($"{join.Artist.Name}", "Details", "Artists", new { id = @join.ArtistId })</li>
+    }
+  }
+</ul>

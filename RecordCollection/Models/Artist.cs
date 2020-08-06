@@ -11,6 +11,7 @@ namespace RecordCollection.Models
     
     public int ArtistId { get; set; }
     public string Name { get; set; }
+    public string ImageUrl { get; set; }
     public virtual ICollection<AlbumArtistGenre> AlbumsGenres { get; set; }
   }
 }

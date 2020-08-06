@@ -21,6 +21,10 @@ namespace RecordCollection.Controllers
       {
         return RedirectToAction("Index", "Artists", new {name = searchString});
       }
+      else if (searchOption == "songs")
+      {
+        return RedirectToAction("Index", "Songs", new {name = searchString});
+      }
       else
       {
         return RedirectToAction("Index", "Genres", new {name = searchString});
