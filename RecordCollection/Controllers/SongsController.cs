@@ -44,13 +44,18 @@ namespace RecordCollection.Controllers
 
     public ActionResult Details(int id)
     {
-      Song song = _db.Songs.Include(songs => songs.Album).First(songs => songs.SongId == id);
+      Song song = _db.Songs
+        .Include(songs => songs.Album)
+        .ThenInclude(join => join.ArtistsGenres)
+        .ThenInclude(albums => albums.Artist)
+        .First(songs => songs.SongId == id);
       return View(song);
     }
 
     public ActionResult Edit(int id)
     {
       Song song = _db.Songs.First(songs => songs.SongId == id);
+      ViewBag.AlbumId = new SelectList(_db.Albums, "AlbumId", "Name");
       return View(song);
     }
 
