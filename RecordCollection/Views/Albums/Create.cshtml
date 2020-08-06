@@ -11,6 +11,9 @@
   @Html.LabelFor(model => model.Name)
   @Html.TextBoxFor(model => model.Name)
 
+  @Html.Label("Url For a Pic:")
+  @Html.TextBoxFor(model => model.ImageUrl)
+
   @Html.Label("Add an Artist To This Album: ")
   @Html.DropDownList("ArtistId", (SelectList)ViewBag.ArtistId, " ")
 
